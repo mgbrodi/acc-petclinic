@@ -1,1 +1,1 @@
-# acc-petclinic
+# acc-spring-boot-jpa
