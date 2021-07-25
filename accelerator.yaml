@@ -1,0 +1,8 @@
+accelerator:
+  displayName: "Spring Boot JPA"
+  description: "Spring Boot application that accesses an SQL database using JPA."
+  iconUrl: https://raw.githubusercontent.com/simple-starters/icons/master/icon-tanzu-light.png
+  tags: 
+  - Java
+  - SQL
+  - JPA
