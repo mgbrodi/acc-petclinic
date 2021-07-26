@@ -18,14 +18,14 @@ accelerator:
 engine:
   merge:
   - include: [ "**/*" ]
-    exclude: [ "kubernetes/*.yaml", "skaffold.yaml", "pom.xml" ]
+    exclude: [ "kubernetes/*.yaml", "skaffold.yaml" ]
     chain:
     - type: ReplaceText
       substitutions:
       - text: spring-sql-jpa
         with: "#artifactId"
   - condition: "#includeSkaffold"
-    include: [ "kubernetes/*.yaml", "skaffold.yaml", "pom.xml" ]
+    include: [ "kubernetes/*.yaml", "skaffold.yaml" ]
     chain:
     - type: ReplaceText
       substitutions:
