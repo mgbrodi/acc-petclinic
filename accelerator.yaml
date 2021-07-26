@@ -28,14 +28,14 @@ engine:
       substitutions:
       - text: spring-sql-jpa
         with: "#artifactId"
-  - condition: "#deploymentType == k8s-simple"
+  - condition: "#deploymentType == 'k8s-simple'"
     include: [ "kubernetes/*.yaml", "skaffold.yaml" ]
     chain:
     - type: ReplaceText
       substitutions:
       - text: spring-sql-jpa
         with: "#artifactId"
-  - condition: "#deploymentType == cloud-foundry"
+  - condition: "#deploymentType == 'cloud-foundry'"
     include: [ "manifest.yaml" ]
     chain:
     - type: ReplaceText
