@@ -8,24 +8,35 @@ accelerator:
   - JPA
   - SQL
   options:
-  - name: includeSkaffold
-    label: Skaffold deployment
-    display: true
-    description: Toggle "On" to include skaffold Kubernetes deployment configurations.
-    inputType: toggle
-    dataType: boolean
-    defaultValue: false
+  - name: deploymentType
+    inputType: select
+    choices:
+    - value: none
+      text: Running Local
+    - value: k8s-simple
+      text: Kubernetes deployment and service
+    - value: cloud-foundry
+      text: Cloud Foundry
+    defaultValue: none
+    required: true
 engine:
   merge:
   - include: [ "**/*" ]
-    exclude: [ "kubernetes/*.yaml", "skaffold.yaml" ]
+    exclude: [ "kubernetes/*.yaml", "skaffold.yaml", "manifest.yaml" ]
     chain:
     - type: ReplaceText
       substitutions:
       - text: spring-sql-jpa
         with: "#artifactId"
-  - condition: "#includeSkaffold"
+  - condition: "#deploymentType == k8s-simple"
     include: [ "kubernetes/*.yaml", "skaffold.yaml" ]
+    chain:
+    - type: ReplaceText
+      substitutions:
+      - text: spring-sql-jpa
+        with: "#artifactId"
+  - condition: "#deploymentType == cloud-foundry"
+    include: [ "manifest.yaml" ]
     chain:
     - type: ReplaceText
       substitutions:
